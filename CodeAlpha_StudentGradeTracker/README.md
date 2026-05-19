@@ -1,5 +1,4 @@
 <think>
-The user wants me to write a description for the Student Grade Tracker project (the first project I created - Task 1) in a similar style to the Stock Trading Platform description I just wrote - without using any icons and human form.
 </think>ENT GRADE TRACKER
 
 Project Overview
