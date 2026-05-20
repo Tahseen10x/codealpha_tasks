@@ -1,9 +1,6 @@
 import java.io.*;
 import java.util.*;
 
-/**
- * STOCK CLASS: Represents a single stock
- */
 class Stock {
     private String symbol;
     private String companyName;
@@ -17,7 +14,6 @@ class Stock {
         this.availableShares = shares;
     }
 
-    // Getters and Setters
     public String getSymbol() { return symbol; }
     public String getCompanyName() { return companyName; }
     public double getPrice() { return price; }
@@ -32,9 +28,6 @@ class Stock {
     }
 }
 
-/**
- * PORTFOLIO ITEM: Represents a stock owned by the user
- */
 class PortfolioItem {
     private String symbol;
     private int quantity;
@@ -52,7 +45,7 @@ class PortfolioItem {
     
     public void addShares(int qty, double price) {
         this.quantity += qty;
-        this.buyPrice = price; // Update average price
+        this.buyPrice = price;
     }
     
     public void removeShares(int qty) {
@@ -68,11 +61,8 @@ class PortfolioItem {
     }
 }
 
-/**
- * TRANSACTION: Records all buy/sell history
- */
 class Transaction implements Serializable {
-    private String type; // BUY or SELL
+    private String type; 
     private String symbol;
     private int quantity;
     private double price;
@@ -92,9 +82,6 @@ class Transaction implements Serializable {
     }
 }
 
-/**
- * USER CLASS: Manages user portfolio and balance
- */
 class User implements Serializable {
     private String name;
     private double balance;
@@ -194,7 +181,7 @@ class User implements Serializable {
         System.out.printf("Total Portfolio Value: $%.2f%n", totalValue);
         System.out.printf("Net Worth: $%.2f%n", balance + totalValue);
         
-        double netProfit = (balance + totalValue) - 10000; // Assuming starting balance
+        double netProfit = (balance + totalValue) - 10000;
         System.out.printf("Net Profit/Loss: $%.2f%n", netProfit);
     }
 
@@ -210,9 +197,6 @@ class User implements Serializable {
     }
 }
 
-/**
- * MAIN CLASS: Trading Platform Interface
- */
 public class StockTradingPlatform {
     private HashMap<String, Stock> marketStocks;
     private User currentUser;
@@ -222,17 +206,15 @@ public class StockTradingPlatform {
         marketStocks = new HashMap<>();
         scanner = new Scanner(System.in);
         initializeMarket();
-        loadUserData(); // Try to load saved data
+        loadUserData(); 
     }
 
     public static void main(String[] args) {
         new StockTradingPlatform().startMenu();
     }
 
-    // --- Initialization ---
     
     private void initializeMarket() {
-        // Adding some fake stocks to the market
         marketStocks.put("AAPL", new Stock("AAPL", "Apple Inc.", 175.50, 1000));
         marketStocks.put("GOOG", new Stock("GOOG", "Alphabet Inc.", 140.25, 800));
         marketStocks.put("MSFT", new Stock("MSFT", "Microsoft", 380.00, 1200));
@@ -240,7 +222,6 @@ public class StockTradingPlatform {
         marketStocks.put("AMZN", new Stock("AMZN", "Amazon.com", 178.90, 750));
     }
 
-    // --- File I/O Methods ---
 
     private void saveUserData() {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("user_data.dat"))) {
@@ -256,7 +237,6 @@ public class StockTradingPlatform {
             currentUser = (User) in.readObject();
             System.out.println("✅ Welcome back, " + currentUser.getName() + "!");
         } catch (Exception e) {
-            // No saved data found, create new user
             createNewUser();
         }
     }
@@ -272,7 +252,6 @@ public class StockTradingPlatform {
         System.out.println("✅ Account created with balance: $" + balance);
     }
 
-    // --- Menu Methods ---
 
     private void startMenu() {
         int choice;
